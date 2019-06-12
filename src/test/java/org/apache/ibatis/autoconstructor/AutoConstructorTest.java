@@ -52,6 +52,7 @@ class AutoConstructorTest {
       final AutoConstructorMapper mapper = sqlSession.getMapper(AutoConstructorMapper.class);
       final Object subject = mapper.getSubject(1);
       assertNotNull(subject);
+      System.out.println(subject);
     }
   }
 
