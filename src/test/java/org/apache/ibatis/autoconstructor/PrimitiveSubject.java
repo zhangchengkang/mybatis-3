@@ -35,4 +35,17 @@ public class PrimitiveSubject {
     this.active = active;
     this.dt = dt;
   }
+
+  @Override
+  public String toString() {
+    return "PrimitiveSubject{" +
+            "id=" + id +
+            ", name='" + name + '\'' +
+            ", age=" + age +
+            ", height=" + height +
+            ", weight=" + weight +
+            ", active=" + active +
+            ", dt=" + dt +
+            '}';
+  }
 }
