@@ -26,8 +26,20 @@ import org.apache.ibatis.reflection.property.PropertyTokenizer;
  */
 public interface ObjectWrapper {
 
+  /**
+   * 获得值
+   *
+   * @param prop PropertyTokenizer 对象，相当于键
+   * @return 值
+   */
   Object get(PropertyTokenizer prop);
 
+  /**
+   * 设置值
+   *
+   * @param prop PropertyTokenizer 对象，相当于键
+   * @param value 值
+   */
   void set(PropertyTokenizer prop, Object value);
 
   String findProperty(String name, boolean useCamelCaseMapping);
@@ -48,6 +60,9 @@ public interface ObjectWrapper {
 
   boolean isCollection();
 
+  /**
+   * 添加元素到集合
+   */
   void add(Object element);
 
   <E> void addAll(List<E> element);

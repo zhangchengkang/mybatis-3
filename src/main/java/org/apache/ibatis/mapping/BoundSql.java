@@ -32,13 +32,36 @@ import org.apache.ibatis.session.Configuration;
  * Can also have additional parameters that are created by the dynamic language (for loops, bind...).
  *
  * @author Clinton Begin
+ *
+ * 一次可执行的 SQL 封装。代码如下：
  */
 public class BoundSql {
 
+  /**
+   * SQL 语句
+   */
   private final String sql;
+
+  /**
+   * 参数映射列表，SQL 中的每个 #{xxx} 占位符都会被解析成相
+   * 应的 ParameterMapping 对象
+   */
   private final List<ParameterMapping> parameterMappings;
+
+  /**
+   * 运行时参数，即用户传入的参数，比如 User 对象，或是其他
+   * 的参数
+   */
   private final Object parameterObject;
+
+  /**
+   * 附加参数集合，用于存储一些额外的信息，比如 datebaseId
+   */
   private final Map<String, Object> additionalParameters;
+
+  /**
+   * {@link #additionalParameters} 的 元数据 对象
+   */
   private final MetaObject metaParameters;
 
   public BoundSql(Configuration configuration, String sql, List<ParameterMapping> parameterMappings, Object parameterObject) {

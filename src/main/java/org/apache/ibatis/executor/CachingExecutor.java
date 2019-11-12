@@ -35,10 +35,18 @@ import org.apache.ibatis.transaction.Transaction;
 /**
  * @author Clinton Begin
  * @author Eduardo Macarron
+ * 支持二级缓存的 Executor 的实现类。
  */
 public class CachingExecutor implements Executor {
 
+  /**
+   * 被委托的 Executor 对象
+   */
   private final Executor delegate;
+
+  /**
+   * TransactionalCacheManager 对象
+   */
   private final TransactionalCacheManager tcm = new TransactionalCacheManager();
 
   public CachingExecutor(Executor delegate) {

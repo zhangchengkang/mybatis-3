@@ -50,12 +50,28 @@ import org.apache.ibatis.type.TypeHandler;
 
 /**
  * @author Clinton Begin
+ * 提供了一些公用的方法，例如创建 ParameterMap、MappedStatement 对象等等。
  */
 public class MapperBuilderAssistant extends BaseBuilder {
 
+  /**
+   * 当前 Mapper 命名空间
+   */
   private String currentNamespace;
+
+  /**
+   * 资源引用的地址
+   */
   private final String resource;
+
+  /**
+   * 当前 Cache 对象
+   */
   private Cache currentCache;
+
+  /**
+   * 是否未解析成功 Cache 引用
+   */
   private boolean unresolvedCacheRef; // issue #676
 
   public MapperBuilderAssistant(Configuration configuration, String resource) {
@@ -69,10 +85,12 @@ public class MapperBuilderAssistant extends BaseBuilder {
   }
 
   public void setCurrentNamespace(String currentNamespace) {
+    // 如果传入的 currentNamespace 参数为空，抛出 BuilderException 异常
     if (currentNamespace == null) {
       throw new BuilderException("The mapper element requires a namespace attribute to be specified.");
     }
 
+    // 如果当前已经设置，并且还和传入的不相等，抛出 BuilderException 异常
     if (this.currentNamespace != null && !this.currentNamespace.equals(currentNamespace)) {
       throw new BuilderException("Wrong namespace. Expected '"
           + this.currentNamespace + "' but found '" + currentNamespace + "'.");
@@ -102,6 +120,7 @@ public class MapperBuilderAssistant extends BaseBuilder {
     return currentNamespace + "." + base;
   }
 
+  //获得指向的 Cache 对象。如果获得不到，则抛出 IncompleteElementException 异常
   public Cache useCacheRef(String namespace) {
     if (namespace == null) {
       throw new BuilderException("cache-ref element requires a namespace attribute.");
@@ -172,6 +191,7 @@ public class MapperBuilderAssistant extends BaseBuilder {
         .build();
   }
 
+  //创建 ResultMap 对象，并添加到 Configuration 中
   public ResultMap addResultMap(
       String id,
       Class<?> type,

@@ -40,11 +40,33 @@ import org.apache.ibatis.type.UnknownTypeHandler;
  */
 public class ResultSetWrapper {
 
+  /**
+   * ResultSet 对象
+   */
   private final ResultSet resultSet;
   private final TypeHandlerRegistry typeHandlerRegistry;
+
+  /**
+   * 字段的名字的数组
+   */
   private final List<String> columnNames = new ArrayList<>();
+
+  /**
+   * 字段的 Java Type 的数组
+   */
   private final List<String> classNames = new ArrayList<>();
+
+  /**
+   * 字段的 JdbcType 的数组
+   */
   private final List<JdbcType> jdbcTypes = new ArrayList<>();
+
+  /**
+   * TypeHandler 的映射
+   *
+   * KEY1：字段的名字
+   * KEY2：Java 属性类型
+   */
   private final Map<String, Map<Class<?>, TypeHandler<?>>> typeHandlerMap = new HashMap<>();
   private final Map<String, List<String>> mappedColumnNamesMap = new HashMap<>();
   private final Map<String, List<String>> unMappedColumnNamesMap = new HashMap<>();
@@ -53,6 +75,7 @@ public class ResultSetWrapper {
     super();
     this.typeHandlerRegistry = configuration.getTypeHandlerRegistry();
     this.resultSet = rs;
+    // <1> 遍历 ResultSetMetaData 的字段们，解析出 columnNames、jdbcTypes、classNames 属性
     final ResultSetMetaData metaData = rs.getMetaData();
     final int columnCount = metaData.getColumnCount();
     for (int i = 1; i <= columnCount; i++) {

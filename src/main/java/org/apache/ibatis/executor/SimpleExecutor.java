@@ -33,6 +33,8 @@ import org.apache.ibatis.transaction.Transaction;
 
 /**
  * @author Clinton Begin
+ * 每次开始读或写操作，都创建对应的 Statement 对象。
+ * 执行完成后，关闭该 Statement 对象。
  */
 public class SimpleExecutor extends BaseExecutor {
 
@@ -82,8 +84,11 @@ public class SimpleExecutor extends BaseExecutor {
 
   private Statement prepareStatement(StatementHandler handler, Log statementLog) throws SQLException {
     Statement stmt;
+    // 获取数据库连接
     Connection connection = getConnection(statementLog);
+    //创建Statement
     stmt = handler.prepare(connection, transaction.getTimeout());
+    //设置IN参数
     handler.parameterize(stmt);
     return stmt;
   }

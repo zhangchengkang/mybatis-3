@@ -28,6 +28,8 @@ import org.apache.ibatis.reflection.property.PropertyTokenizer;
 
 /**
  * @author Clinton Begin
+ *
+ * 类的元数据，基于 Reflector 和 PropertyTokenizer ，提供对指定类的各种骚操作。
  */
 public class MetaClass {
 
@@ -54,6 +56,7 @@ public class MetaClass {
   }
 
   public String findProperty(String name, boolean useCamelCaseMapping) {
+    //  下划线转驼峰
     if (useCamelCaseMapping) {
       name = name.replace("_", "");
     }

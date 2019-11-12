@@ -17,6 +17,9 @@ package org.apache.ibatis.exceptions;
 
 /**
  * @author Clinton Begin
+ *
+ * 查询返回过多结果的异常
+ * 期望返回一条，实际返回了多条
  */
 public class TooManyResultsException extends PersistenceException {
 

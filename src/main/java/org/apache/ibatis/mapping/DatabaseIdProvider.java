@@ -31,5 +31,12 @@ public interface DatabaseIdProvider {
 
   void setProperties(Properties p);
 
+  /**
+   * 获得数据库标识
+   *
+   * @param dataSource 数据源
+   * @return 数据库标识
+   * @throws SQLException 当 DB 发生异常时
+   */
   String getDatabaseId(DataSource dataSource) throws SQLException;
 }

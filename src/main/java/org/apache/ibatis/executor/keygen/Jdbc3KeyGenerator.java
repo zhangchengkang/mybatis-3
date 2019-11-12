@@ -44,11 +44,14 @@ import org.apache.ibatis.type.TypeHandlerRegistry;
 /**
  * @author Clinton Begin
  * @author Kazuki Shimizu
+ * MYSQL
  */
 public class Jdbc3KeyGenerator implements KeyGenerator {
 
   /**
    * A shared instance.
+   *
+   * 共享的单例
    *
    * @since 3.4.3
    */

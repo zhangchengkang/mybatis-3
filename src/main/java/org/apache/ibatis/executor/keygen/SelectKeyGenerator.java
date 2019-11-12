@@ -29,6 +29,7 @@ import org.apache.ibatis.session.RowBounds;
 /**
  * @author Clinton Begin
  * @author Jeff Butler
+ * Oracle、PostgreSQL 。
  */
 public class SelectKeyGenerator implements KeyGenerator {
 

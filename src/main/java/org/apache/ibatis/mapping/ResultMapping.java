@@ -30,20 +30,81 @@ import org.apache.ibatis.type.TypeHandlerRegistry;
  */
 public class ResultMapping {
 
+  /**
+   * MyBatis Configuration 对象
+   */
   private Configuration configuration;
+
+  /**
+   * Java 对象的属性名
+   */
   private String property;
+
+  /**
+   * 数据库的字段名
+   */
   private String column;
+
+  /**
+   * Java 对象的属性的类型
+   */
   private Class<?> javaType;
+
+  /**
+   * 数据库的字段的类型
+   */
   private JdbcType jdbcType;
+
+  /**
+   * TypeHandler 对象
+   */
   private TypeHandler<?> typeHandler;
+
+  /**
+   * 内嵌的 ResultMap 编号
+   */
   private String nestedResultMapId;
+
+  /**
+   * 内嵌的查询语句编号
+   */
   private String nestedQueryId;
+
+  /**
+   * 非空字段集合
+   */
   private Set<String> notNullColumns;
+
+  /**
+   * 当连接多表时，你将不得不使用列别名来避免ResultSet中的重复列名。指定columnPrefix允许你映射列名到一个外部的结果集中。
+   */
   private String columnPrefix;
+
+  /**
+   * ResultFlag 集合
+   */
   private List<ResultFlag> flags;
+
+  /**
+   * 组合字段解析后的 ResultMapping 集合
+   *
+   * {@link org.apache.ibatis.builder.MapperBuilderAssistant#parseCompositeColumnName(String)}
+   */
   private List<ResultMapping> composites;
+
+  /**
+   * 标识这个将会从哪里加载的复杂类型数据的结果集合的名称
+   */
   private String resultSet;
+
+  /**
+   * 标识出包含 foreign keys 的列的名称。这个 foreign keys的值将会和父类型中指定的列属性的值相匹配
+   */
   private String foreignColumn;
+
+  /**
+   * 是否懒加载
+   */
   private boolean lazy;
 
   ResultMapping() {
@@ -169,6 +230,9 @@ public class ResultMapping {
       }
     }
 
+    /**
+     * 解析 TypeHandler
+     */
     private void resolveTypeHandler() {
       if (resultMapping.typeHandler == null && resultMapping.javaType != null) {
         Configuration configuration = resultMapping.configuration;

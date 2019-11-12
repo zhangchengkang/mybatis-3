@@ -21,9 +21,28 @@ import java.util.Iterator;
  * @author Clinton Begin
  */
 public class PropertyTokenizer implements Iterator<PropertyTokenizer> {
+
+  /**
+   * 当前字符串
+   */
   private String name;
+
+  /**
+   * 索引的 {@link #name} ，因为 {@link #name} 如果存在 {@link #index} 会被更改
+   */
   private final String indexedName;
+
+  /**
+   * 编号。
+   *
+   * 对于数组 name[0] ，则 index = 0
+   * 对于 Map map[key] ，则 index = key
+   */
   private String index;
+
+  /**
+   * 剩余字符串
+   */
   private final String children;
 
   public PropertyTokenizer(String fullname) {
